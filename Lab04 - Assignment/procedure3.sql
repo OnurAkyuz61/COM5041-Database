@@ -1,0 +1,21 @@
+USE WideWorldImporters;
+GO
+
+REVOKE ALTER, INSERT ON Sales.OrderLines FROM USER_D;
+REVOKE UPDATE, INSERT ON Purchasing.SupplierCategories FROM USER_D;
+REVOKE SELECT ON Application.StateProvinces FROM USER_D;
+GO
+
+ALTER ROLE USER_D DROP MEMBER Login_D;
+GO
+
+DROP ROLE USER_D;
+GO
+
+DROP USER Login_D;
+GO
+
+USE master;
+GO
+DROP LOGIN Login_D;
+GO
