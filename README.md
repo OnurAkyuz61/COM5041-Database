@@ -13,15 +13,28 @@ Bu repository, COM5041 Veritabanı Sistemleri dersi kapsamında yapılan laborat
 
 ```
 database/
-├── README.md                           # Bu dosya
-├── Lab01 - SQL Server Installation/    # SQL Server kurulum ve yapılandırma
-├── Lab02 - Assignment/                 # İkinci hafta laboratuvar ödevi
-├── Lab03 - Assignment/                 # Üçüncü hafta laboratuvar ödevi
-└── Lab04 - Assignment/                 # Dördüncü hafta laboratuvar ödevi
-    ├── LAB04_Assignment.pdf           # Ödev talimatları
-    ├── procedure1.sql                 # Rol oluşturma ve yetki verme
-    ├── procedure2.sql                 # Login ve kullanıcı yönetimi
-    └── procedure3.sql                 # Temizleme işlemleri
+├── README.md                                    # Bu dosya
+├── Lab01 - SQL Server Installation/             # SQL Server kurulum ve yapılandırma
+├── Lab02 - Assignment/                          # İkinci hafta laboratuvar ödevi
+├── Lab03 - Assignment/                          # Üçüncü hafta laboratuvar ödevi
+├── Lab04 - Assignment/                          # Dördüncü hafta laboratuvar ödevi
+│   ├── LAB04_Assignment.pdf                    # Ödev talimatları
+│   ├── procedure1.sql                          # Rol oluşturma ve yetki verme
+│   ├── procedure2.sql                          # Login ve kullanıcı yönetimi
+│   └── procedure3.sql                          # Temizleme işlemleri
+└── Lab05/                                       # Beşinci hafta laboratuvar çalışmaları
+    ├── LAB05_Basic SQL _Manual_ _1_.pdf        # Lab manual
+    ├── PROCEDURE 1 - SQL Data Definition and Data Types/
+    │   └── procedure1_solution.sql             # Veritabanı ve tablo oluşturma
+    ├── PROCEDURE 2 - Adding constraints to a table/
+    │   └── procedure2_solution.sql             # Constraint'ler ve kısıtlamalar
+    ├── PROCEDURE 3- INSERT, DELETE, and UPDATE Statements in SQL/
+    │   └── procedure3_solution.sql             # Veri manipülasyonu
+    ├── PROCEDURE 4 - Basic Retrieval Queries in SQL/
+    │   └── procedure4_solution.sql             # SELECT sorguları
+    └── PROCEDURE 5 - ASSIGNMENT/
+        ├── 2200005590_assignment_procedure1.sql # Assignment - Schema oluşturma
+        └── 2200005590_assignment_procedure2.sql # Assignment - Veri işlemleri
 ```
 
 ## 🎯 Öğrenme Hedefleri
@@ -64,6 +77,14 @@ database/
   - `procedure2.sql` - Login ve kullanıcı oluşturma
   - `procedure3.sql` - Temizleme ve silme işlemleri
 
+### Lab05 - Temel SQL ve Veritabanı Tasarımı
+- **Kapsam**: SQL DDL, DML komutları ve veritabanı yapısı
+- **Procedure 1**: Veritabanı ve tablo oluşturma (CREATE DATABASE, CREATE TABLE)
+- **Procedure 2**: Constraint'ler (PRIMARY KEY, FOREIGN KEY, UNIQUE, DEFAULT)
+- **Procedure 3**: Veri manipülasyonu (INSERT, UPDATE, DELETE)
+- **Procedure 4**: Veri sorgulama (SELECT, JOIN, UNION, ORDER BY)
+- **Assignment**: Müzik şirketi veritabanı tasarımı (E-R diyagramından SQL'e)
+
 ## 🔧 Teknik Detaylar
 
 ### Lab04 - Güvenlik Yönetimi Detayları
@@ -87,9 +108,31 @@ GRANT SELECT ON Application.StateProvinces TO USER_D;
 - Rol üyeliğini kaldırma
 - Kullanıcı ve login silme
 
-### Kullanılan Veritabanı
-- **Ana Veritabanı**: `WideWorldImporters`
-- **Sistem Veritabanı**: `master`
+### Lab05 - Temel SQL Detayları
+
+#### Procedure 1: Veritabanı ve Tablo Oluşturma
+```sql
+CREATE DATABASE TheFirstDatabase;
+CREATE TABLE Employee (
+    EmployeeID int NOT NULL IDENTITY(1,1),
+    FirstName varchar(50) NOT NULL,
+    LastName varchar(50) NOT NULL
+);
+```
+
+#### Procedure 2: Constraint Ekleme
+- Primary Key, Foreign Key, Unique, Default constraint'leri
+- Referential integrity (veri bütünlüğü) sağlama
+- Services ve Services_by_Employees junction tablosu
+
+#### Assignment: Müzik Şirketi Veritabanı
+- Musicians, Instruments, Plays tabloları
+- Many-to-Many ilişki tasarımı
+- Referential integrity test edilmesi
+
+### Kullanılan Veritabanları
+- **Lab04**: `WideWorldImporters`, `master`
+- **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -128,12 +171,6 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - Koşullu nesne oluşturma (`IF NOT EXISTS`)
 - Transaction yönetimi (`GO` komutları)
 
-## 📈 Gelecek Planları
-
-- **Proje Geliştirme**: Meal Planner Database projesi
-- **İleri SQL**: Window functions, CTE'ler
-- **NoSQL**: MongoDB ve diğer NoSQL veritabanları
-- **Cloud Databases**: Azure SQL Database
 
 ## 📞 İletişim
 
