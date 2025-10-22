@@ -32,9 +32,18 @@ database/
     │   └── procedure3_solution.sql             # Veri manipülasyonu
     ├── PROCEDURE 4 - Basic Retrieval Queries in SQL/
     │   └── procedure4_solution.sql             # SELECT sorguları
-    └── PROCEDURE 5 - ASSIGNMENT/
-        ├── 2200005590_assignment_procedure1.sql # Assignment - Schema oluşturma
-        └── 2200005590_assignment_procedure2.sql # Assignment - Veri işlemleri
+    ├── PROCEDURE 5 - ASSIGNMENT/
+    │   ├── 2200005590_assignment_procedure1.sql # Assignment A - Schema oluşturma
+    │   └── 2200005590_assignment_procedure2.sql # Assignment A - Veri işlemleri
+    ├── PROCEDURE 6 - ASSIGNMENT B/
+    │   ├── 2200005590_assignment_b_procedure1.sql # Assignment B - Schema
+    │   └── 2200005590_assignment_b_procedure2.sql # Assignment B - Veri işlemleri
+    ├── PROCEDURE 7 - ASSIGNMENT C/
+    │   ├── 2200005590_assignment_c_procedure1.sql # Assignment C - Schema
+    │   └── 2200005590_assignment_c_procedure2.sql # Assignment C - Veri işlemleri
+    └── PROCEDURE 8 - ASSIGNMENT D/
+        ├── 2200005590_assignment_d_procedure1.sql # Assignment D - Schema
+        └── 2200005590_assignment_d_procedure2.sql # Assignment D - Veri işlemleri
 ```
 
 ## 🎯 Öğrenme Hedefleri
@@ -83,7 +92,10 @@ database/
 - **Procedure 2**: Constraint'ler (PRIMARY KEY, FOREIGN KEY, UNIQUE, DEFAULT)
 - **Procedure 3**: Veri manipülasyonu (INSERT, UPDATE, DELETE)
 - **Procedure 4**: Veri sorgulama (SELECT, JOIN, UNION, ORDER BY)
-- **Assignment**: Müzik şirketi veritabanı tasarımı (E-R diyagramından SQL'e)
+- **Assignment A**: Thom Yorke & PJ Harvey müzik veritabanı
+- **Assignment B**: David Bowie & Brian Molko müzik veritabanı
+- **Assignment C**: Harun Tekin & Teoman müzik veritabanı
+- **Assignment D**: Tarja Turunen & Floor Jansen müzik veritabanı
 
 ## 🔧 Teknik Detaylar
 
@@ -125,14 +137,17 @@ CREATE TABLE Employee (
 - Referential integrity (veri bütünlüğü) sağlama
 - Services ve Services_by_Employees junction tablosu
 
-#### Assignment: Müzik Şirketi Veritabanı
-- Musicians, Instruments, Plays tabloları
-- Many-to-Many ilişki tasarımı
-- Referential integrity test edilmesi
+#### Assignment A-D: Müzik Şirketi Veritabanları
+- **Assignment A**: Thom Yorke & PJ Harvey (MusicCompanyDB)
+- **Assignment B**: David Bowie & Brian Molko (MusicCompanyDB_B)
+- **Assignment C**: Harun Tekin & Teoman (MusicCompanyDB_C)
+- **Assignment D**: Tarja Turunen & Floor Jansen (MusicCompanyDB_D)
+- Musicians, Instruments, Plays tabloları (Many-to-Many ilişki)
+- Referential integrity constraint testleri
 
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
-- **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`
+- **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
 
 ## 🚀 Kurulum ve Çalıştırma
 
