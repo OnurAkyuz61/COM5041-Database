@@ -1,4 +1,4 @@
-# COM5041 - Veritabanı Sistemleri Dersi
+# COM5041 - Database Design and Development
 
 **Öğrenci**: Onur Akyüz  
 **Öğrenci No**: 2200005590  
@@ -7,12 +7,12 @@
 
 ## 📋 Ders Hakkında
 
-Bu repository, COM5041 Veritabanı Sistemleri dersi kapsamında yapılan laboratuvar çalışmaları, ödevler ve projelerini içermektedir. Ders boyunca SQL Server, veritabanı tasarımı, SQL sorguları, stored procedure'ler ve veritabanı güvenliği konularında pratik uygulamalar gerçekleştirilmiştir.
+Bu repository, COM5041 Database Design and Development dersi kapsamında yapılan laboratuvar çalışmaları, ödevler ve projelerini içermektedir. Ders boyunca SQL Server, veritabanı tasarımı, SQL sorguları, stored procedure'ler ve veritabanı güvenliği konularında pratik uygulamalar gerçekleştirilmiştir.
 
 ## 📁 Proje Yapısı
 
 ```
-database/
+COM5041-Database/
 ├── README.md                                    # Bu dosya
 ├── Lab01 - SQL Server Installation/             # SQL Server kurulum ve yapılandırma
 ├── Lab02 - Assignment/                          # İkinci hafta laboratuvar ödevi
@@ -22,28 +22,40 @@ database/
 │   ├── procedure1.sql                          # Rol oluşturma ve yetki verme
 │   ├── procedure2.sql                          # Login ve kullanıcı yönetimi
 │   └── procedure3.sql                          # Temizleme işlemleri
-└── Lab05/                                       # Beşinci hafta laboratuvar çalışmaları
-    ├── LAB05_Basic SQL _Manual_ _1_.pdf        # Lab manual
-    ├── PROCEDURE 1 - SQL Data Definition and Data Types/
-    │   └── procedure1_solution.sql             # Veritabanı ve tablo oluşturma
-    ├── PROCEDURE 2 - Adding constraints to a table/
-    │   └── procedure2_solution.sql             # Constraint'ler ve kısıtlamalar
-    ├── PROCEDURE 3- INSERT, DELETE, and UPDATE Statements in SQL/
-    │   └── procedure3_solution.sql             # Veri manipülasyonu
-    ├── PROCEDURE 4 - Basic Retrieval Queries in SQL/
-    │   └── procedure4_solution.sql             # SELECT sorguları
-    ├── PROCEDURE 5 - ASSIGNMENT/
-    │   ├── 2200005590_assignment_procedure1.sql # Assignment A - Schema oluşturma
-    │   └── 2200005590_assignment_procedure2.sql # Assignment A - Veri işlemleri
-    ├── PROCEDURE 6 - ASSIGNMENT B/
-    │   ├── 2200005590_assignment_b_procedure1.sql # Assignment B - Schema
-    │   └── 2200005590_assignment_b_procedure2.sql # Assignment B - Veri işlemleri
-    ├── PROCEDURE 7 - ASSIGNMENT C/
-    │   ├── 2200005590_assignment_c_procedure1.sql # Assignment C - Schema
-    │   └── 2200005590_assignment_c_procedure2.sql # Assignment C - Veri işlemleri
-    └── PROCEDURE 8 - ASSIGNMENT D/
-        ├── 2200005590_assignment_d_procedure1.sql # Assignment D - Schema
-        └── 2200005590_assignment_d_procedure2.sql # Assignment D - Veri işlemleri
+├── Lab05/                                       # Beşinci hafta laboratuvar çalışmaları
+│   ├── LAB05_Basic SQL _Manual_ _1_.pdf        # Lab manual
+│   ├── PROCEDURE 1 - SQL Data Definition and Data Types/
+│   │   └── procedure1_solution.sql             # Veritabanı ve tablo oluşturma
+│   ├── PROCEDURE 2 - Adding constraints to a table/
+│   │   └── procedure2_solution.sql             # Constraint'ler ve kısıtlamalar
+│   ├── PROCEDURE 3- INSERT, DELETE, and UPDATE Statements in SQL/
+│   │   └── procedure3_solution.sql             # Veri manipülasyonu
+│   ├── PROCEDURE 4 - Basic Retrieval Queries in SQL/
+│   │   └── procedure4_solution.sql             # SELECT sorguları
+│   ├── PROCEDURE 5 - ASSIGNMENT/
+│   │   ├── 2200005590_assignment_procedure1.sql # Assignment A - Schema oluşturma
+│   │   └── 2200005590_assignment_procedure2.sql # Assignment A - Veri işlemleri
+│   ├── PROCEDURE 6 - ASSIGNMENT B/
+│   │   ├── 2200005590_assignment_b_procedure1.sql # Assignment B - Schema
+│   │   └── 2200005590_assignment_b_procedure2.sql # Assignment B - Veri işlemleri
+│   ├── PROCEDURE 7 - ASSIGNMENT C/
+│   │   ├── 2200005590_assignment_c_procedure1.sql # Assignment C - Schema
+│   │   └── 2200005590_assignment_c_procedure2.sql # Assignment C - Veri işlemleri
+│   └── PROCEDURE 8 - ASSIGNMENT D/
+│       ├── 2200005590_assignment_d_procedure1.sql # Assignment D - Schema
+│       └── 2200005590_assignment_d_procedure2.sql # Assignment D - Veri işlemleri
+└── Lab06/                                       # Altıncı hafta laboratuvar çalışmaları
+    ├── LAB06_Advanced SQL _Manual.pdf          # Lab manual
+    ├── AdventureWorks2019.bak                  # Örnek veritabanı backup dosyası
+    ├── PROCEDURE 1 - Using the JOIN operator to return data from multiple tables/
+    │   └── Procedure1_JOIN_Solutions.sql       # JOIN işlemleri (INNER, LEFT, RIGHT)
+    ├── PROCEDURE 2 - Perform aggregating, grouping, and windowing/
+    │   └── Procedure2_Aggregation_Solutions.sql # Aggregation ve GROUP BY
+    ├── PROCEDURE 3 - Nested Queries in SQL/
+    │   └── Procedure3_NestedQueries_Solutions.sql # Subquery ve nested queries
+    ├── PROCEDURE 4 - Limiting the data returned in your result set/
+    │   └── Procedure4_LimitingData_Solutions.sql # TOP, DISTINCT, UNION
+    └── PROCEDURE 5 - ASSIGNMENT/               # Assignment dosyaları (32 items)
 ```
 
 ## 🎯 Öğrenme Hedefleri
@@ -97,6 +109,15 @@ database/
 - **Assignment C**: Harun Tekin & Teoman müzik veritabanı
 - **Assignment D**: Tarja Turunen & Floor Jansen müzik veritabanı
 
+### Lab06 - İleri SQL Teknikleri
+- **Kapsam**: JOIN işlemleri, aggregation, subqueries ve veri filtreleme
+- **Veritabanı**: AdventureWorks2019
+- **Procedure 1**: JOIN operatörleri (INNER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN)
+- **Procedure 2**: Aggregation ve gruplama (SUM, AVG, COUNT, GROUP BY, HAVING)
+- **Procedure 3**: Nested queries ve subqueries (WHERE subqueries, IN operatörü)
+- **Procedure 4**: Veri sınırlama (TOP, DISTINCT, UNION, NULL filtreleme)
+- **Assignment**: Northwind veritabanı ile pratik uygulamalar
+
 ## 🔧 Teknik Detaylar
 
 ### Lab04 - Güvenlik Yönetimi Detayları
@@ -145,20 +166,79 @@ CREATE TABLE Employee (
 - Musicians, Instruments, Plays tabloları (Many-to-Many ilişki)
 - Referential integrity constraint testleri
 
+### Lab06 - İleri SQL Teknikleri Detayları
+
+#### Procedure 1: JOIN İşlemleri
+```sql
+-- INNER JOIN: Sadece eşleşen kayıtlar
+SELECT p.ProductID, p.Name, sd.OrderQty, sd.UnitPrice
+FROM Production.Product AS p
+INNER JOIN Sales.SalesOrderDetail sd ON p.ProductID = sd.ProductID;
+
+-- LEFT OUTER JOIN: Sol tablodaki tüm kayıtlar
+SELECT p.ProductID, sd.ProductID, p.Name, sd.OrderQty, sd.UnitPrice
+FROM Production.Product AS p
+LEFT OUTER JOIN Sales.SalesOrderDetail sd ON p.ProductID = sd.ProductID;
+```
+
+#### Procedure 2: Aggregation ve Gruplama
+```sql
+-- SUM, AVG, COUNT fonksiyonları
+SELECT SUM(poh.TotalDue) AS [Total Due],
+       AVG(poh.TotalDue) AS [Average Total Due],
+       COUNT(poh.EmployeeID) [Number Of Employees]
+FROM Purchasing.PurchaseOrderHeader poh;
+
+-- GROUP BY ile gruplama
+SELECT sm.Name AS ShippingMethod,
+       SUM(poh.TotalDue) AS [Total Due]
+FROM Purchasing.PurchaseOrderHeader poh
+INNER JOIN Purchasing.ShipMethod sm ON poh.ShipMethodID = sm.ShipMethodID
+GROUP BY sm.Name;
+```
+
+#### Procedure 3: Nested Queries
+```sql
+-- Subquery ile ortalamadan fazla vacation hours
+SELECT BusinessEntityID, LoginID, JobTitle, VacationHours
+FROM HumanResources.Employee E1
+WHERE VacationHours > (SELECT AVG(VacationHours) 
+                       FROM HumanResources.Employee E2);
+```
+
+#### Procedure 4: Veri Sınırlama
+```sql
+-- TOP ile sınırlama
+SELECT TOP(5) SalesOrderID, OrderDate, TotalDue
+FROM Sales.SalesOrderHeader
+ORDER BY TotalDue DESC;
+
+-- DISTINCT ile tekrar eden değerleri kaldırma
+SELECT DISTINCT p.Name AS ProductName
+FROM Production.Product AS p
+INNER JOIN Sales.SalesOrderDetail sd ON p.ProductID = sd.ProductID;
+```
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
+- **Lab06**: `AdventureWorks2019`, `Northwind` (Assignment)
 
 ## 🚀 Kurulum ve Çalıştırma
 
 ### Gereksinimler
 - SQL Server 2019 veya üzeri
 - SQL Server Management Studio (SSMS)
-- WideWorldImporters örnek veritabanı
+- WideWorldImporters örnek veritabanı (Lab04 için)
+- AdventureWorks2019 örnek veritabanı (Lab06 için)
+- Northwind örnek veritabanı (Lab06 Assignment için)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
-2. WideWorldImporters veritabanını yükleyin
+2. Gerekli örnek veritabanlarını yükleyin:
+   - WideWorldImporters (Lab04)
+   - AdventureWorks2019 (Lab06)
+   - Northwind (Lab06 Assignment)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
 
@@ -190,7 +270,8 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 ## 📞 İletişim
 
 - **GitHub**: [OnurAkyuz61](https://github.com/OnurAkyuz61)
+- **Repository**: [COM5041-Database](https://github.com/OnurAkyuz61/COM5041-Database)
 
 ---
 
-**Not**: Bu repository akademik amaçlarla oluşturulmuştur ve İstanbul Kültür Üniversitesi COM5041 Veritabanı Sistemleri dersi kapsamındaki çalışmaları içermektedir.
+**Not**: Bu repository akademik amaçlarla oluşturulmuştur ve İstanbul Kültür Üniversitesi COM5041 Database Design and Development dersi kapsamında yapılan çalışmaları içermektedir.
