@@ -44,18 +44,21 @@ COM5041-Database/
 │   └── PROCEDURE 8 - ASSIGNMENT D/
 │       ├── 2200005590_assignment_d_procedure1.sql # Assignment D - Schema
 │       └── 2200005590_assignment_d_procedure2.sql # Assignment D - Veri işlemleri
-└── Lab06/                                       # Altıncı hafta laboratuvar çalışmaları
-    ├── LAB06_Advanced SQL _Manual.pdf          # Lab manual
-    ├── AdventureWorks2019.bak                  # Örnek veritabanı backup dosyası
-    ├── PROCEDURE 1 - Using the JOIN operator to return data from multiple tables/
-    │   └── Procedure1_JOIN_Solutions.sql       # JOIN işlemleri (INNER, LEFT, RIGHT)
-    ├── PROCEDURE 2 - Perform aggregating, grouping, and windowing/
-    │   └── Procedure2_Aggregation_Solutions.sql # Aggregation ve GROUP BY
-    ├── PROCEDURE 3 - Nested Queries in SQL/
-    │   └── Procedure3_NestedQueries_Solutions.sql # Subquery ve nested queries
-    ├── PROCEDURE 4 - Limiting the data returned in your result set/
-    │   └── Procedure4_LimitingData_Solutions.sql # TOP, DISTINCT, UNION
-    └── PROCEDURE 5 - ASSIGNMENT/               # Assignment dosyaları (32 items)
+├── Lab06/                                       # Altıncı hafta laboratuvar çalışmaları
+│   ├── LAB06_Advanced SQL _Manual.pdf          # Lab manual
+│   ├── AdventureWorks2019.bak                  # Örnek veritabanı backup dosyası
+│   ├── PROCEDURE 1 - Using the JOIN operator to return data from multiple tables/
+│   │   └── Procedure1_JOIN_Solutions.sql       # JOIN işlemleri (INNER, LEFT, RIGHT)
+│   ├── PROCEDURE 2 - Perform aggregating, grouping, and windowing/
+│   │   └── Procedure2_Aggregation_Solutions.sql # Aggregation ve GROUP BY
+│   ├── PROCEDURE 3 - Nested Queries in SQL/
+│   │   └── Procedure3_NestedQueries_Solutions.sql # Subquery ve nested queries
+│   ├── PROCEDURE 4 - Limiting the data returned in your result set/
+│   │   └── Procedure4_LimitingData_Solutions.sql # TOP, DISTINCT, UNION
+│   └── PROCEDURE 5 - ASSIGNMENT/               # Assignment dosyaları (32 items)
+└── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
+    ├── quiz01_questions.pdf                     # Quiz soruları
+    └── quiz01_answers.sql                       # Quiz cevapları
 ```
 
 ## 🎯 Öğrenme Hedefleri
@@ -117,6 +120,19 @@ COM5041-Database/
 - **Procedure 3**: Nested queries ve subqueries (WHERE subqueries, IN operatörü)
 - **Procedure 4**: Veri sınırlama (TOP, DISTINCT, UNION, NULL filtreleme)
 - **Assignment**: Northwind veritabanı ile pratik uygulamalar
+
+## 📝 Quiz Çalışmaları
+
+### Quiz 01 - Temel Veritabanı Kavramları
+- **Kapsam**: Veritabanı temel kavramları, SQL Server temelleri
+- **Konular**:
+  - Veritabanı yönetim sistemleri (DBMS)
+  - İlişkisel veritabanı modeli
+  - SQL Server mimarisi
+  - Temel SQL komutları
+  - Veri türleri ve constraint'ler
+- **Tarih**: Hafta 7
+- **Durum**: Tamamlandı ✅
 
 ## 🔧 Teknik Detaylar
 
