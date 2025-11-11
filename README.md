@@ -56,6 +56,28 @@ COM5041-Database/
 │   ├── PROCEDURE 4 - Limiting the data returned in your result set/
 │   │   └── Procedure4_LimitingData_Solutions.sql # TOP, DISTINCT, UNION
 │   └── PROCEDURE 5 - ASSIGNMENT/               # Assignment dosyaları (32 items)
+├── Lab07/                                       # Yedinci hafta laboratuvar çalışmaları
+│   ├── LAB07_ Introduction to Views and, the code scripts in SQL _Manual_.pdf # Lab manual
+│   ├── PROCEDURE 1 - How to create a view in SQL/
+│   │   └── create_view_examples.sql            # View oluşturma örnekleri
+│   ├── PROCEDURE 2 - How to update a view in SQL/
+│   │   └── update_view_examples.sql            # View güncelleme örnekleri
+│   ├── PROCEDURE 3 - How to insert or delete rows through a view in SQL/
+│   │   └── insert_delete_view_examples.sql     # View üzerinden veri işlemleri
+│   ├── PROCEDURE 4 - How to modify or delete a view in SQL/
+│   │   └── modify_delete_view_examples.sql     # View değiştirme ve silme
+│   ├── PROCEDURE 5 - How to use the View Designer in SQL/ # View Designer kullanımı
+│   ├── PROCEDURE 6 - How to code scripts in SQL/
+│   │   ├── 01_database_creation_script.sql     # Veritabanı oluşturma script'i
+│   │   ├── 02_variables_and_calculations.sql   # Değişkenler ve hesaplamalar
+│   │   ├── 03_table_variables.sql              # Tablo değişkenleri
+│   │   ├── 04_temporary_tables.sql             # Geçici tablolar
+│   │   └── 05_derived_tables.sql               # Türetilmiş tablolar
+│   ├── PROCEDURE 7 - How to control the execution of a script/
+│   │   ├── 01_if_else_control_flow.sql         # IF-ELSE kontrol yapıları
+│   │   └── 02_while_loop_example.sql           # WHILE döngü örnekleri
+│   └── PROCEDURE 8 - How to handle errors in SQL/
+│       └── error_handling_examples.sql         # Hata yönetimi örnekleri
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -120,6 +142,17 @@ COM5041-Database/
 - **Procedure 3**: Nested queries ve subqueries (WHERE subqueries, IN operatörü)
 - **Procedure 4**: Veri sınırlama (TOP, DISTINCT, UNION, NULL filtreleme)
 - **Assignment**: Northwind veritabanı ile pratik uygulamalar
+
+### Lab07 - Views ve SQL Script Programlama
+- **Kapsam**: SQL View'ları, script programlama, kontrol yapıları ve hata yönetimi
+- **Procedure 1**: View oluşturma (CREATE VIEW, SELECT statement'ları)
+- **Procedure 2**: View güncelleme (ALTER VIEW, view modifikasyonu)
+- **Procedure 3**: View üzerinden veri işlemleri (INSERT, DELETE through views)
+- **Procedure 4**: View yönetimi (DROP VIEW, view silme ve değiştirme)
+- **Procedure 5**: View Designer kullanımı (SSMS grafik araçları)
+- **Procedure 6**: SQL Script programlama (variables, table variables, temporary tables)
+- **Procedure 7**: Script kontrol yapıları (IF-ELSE, WHILE loops)
+- **Procedure 8**: Hata yönetimi (TRY-CATCH, error handling)
 
 ## 📝 Quiz Çalışmaları
 
@@ -235,10 +268,61 @@ FROM Production.Product AS p
 INNER JOIN Sales.SalesOrderDetail sd ON p.ProductID = sd.ProductID;
 ```
 
+### Lab07 - Views ve SQL Script Programlama Detayları
+
+#### Procedure 1: View Oluşturma
+```sql
+-- Basit view oluşturma
+CREATE VIEW VProductSpecialList
+AS
+SELECT p.ProductID AS [ProductIdNumber],
+       p.Name AS [ProductName],
+       p.ProductNumber AS [ProductMainNumber]
+FROM [Production].[Product] as p
+WHERE ProductID > 900;
+
+-- View'dan veri sorgulama
+SELECT * FROM VProductSpecialList;
+```
+
+#### Procedure 6: SQL Script Programlama
+```sql
+-- Değişken tanımlama ve hesaplama
+DECLARE @TotalPrice money;
+SET @TotalPrice = (SELECT SUM(pod.OrderQty * UnitPrice) 
+                   FROM Purchasing.PurchaseOrderDetail pod);
+
+-- Koşullu işlem
+IF @TotalPrice > 0
+    PRINT 'Total price = $' + CONVERT(varchar, @TotalPrice, 1)
+ELSE
+    PRINT 'There is not order';
+```
+
+#### Procedure 7: Kontrol Yapıları
+```sql
+-- IF-ELSE kontrol yapısı
+IF (SELECT COUNT(*) FROM Production.Product 
+    WHERE Name LIKE 'Touring-3000%') > 5
+    PRINT 'There are more than 5 Touring-3000 bicycles.'
+ELSE
+    PRINT 'There are 5 or less Touring-3000 bicycles.';
+```
+
+#### Lab07 Kapsamındaki Konular
+- **Views**: CREATE VIEW, ALTER VIEW, DROP VIEW
+- **View Operations**: SELECT, INSERT, UPDATE, DELETE through views
+- **Variables**: DECLARE, SET, scalar variables
+- **Table Variables**: DECLARE @table_var TABLE
+- **Temporary Tables**: CREATE TABLE #temp_table
+- **Control Flow**: IF-ELSE, WHILE loops
+- **Error Handling**: TRY-CATCH blocks
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
 - **Lab06**: `AdventureWorks2019`, `Northwind` (Assignment)
+- **Lab07**: `AdventureWorks2019`
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -246,14 +330,14 @@ INNER JOIN Sales.SalesOrderDetail sd ON p.ProductID = sd.ProductID;
 - SQL Server 2019 veya üzeri
 - SQL Server Management Studio (SSMS)
 - WideWorldImporters örnek veritabanı (Lab04 için)
-- AdventureWorks2019 örnek veritabanı (Lab06 için)
+- AdventureWorks2019 örnek veritabanı (Lab06 ve Lab07 için)
 - Northwind örnek veritabanı (Lab06 Assignment için)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
 2. Gerekli örnek veritabanlarını yükleyin:
    - WideWorldImporters (Lab04)
-   - AdventureWorks2019 (Lab06)
+   - AdventureWorks2019 (Lab06, Lab07)
    - Northwind (Lab06 Assignment)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
