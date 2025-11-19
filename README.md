@@ -78,6 +78,20 @@ COM5041-Database/
 │   │   └── 02_while_loop_example.sql           # WHILE döngü örnekleri
 │   └── PROCEDURE 8 - How to handle errors in SQL/
 │       └── error_handling_examples.sql         # Hata yönetimi örnekleri
+├── Lab08/                                       # Sekizinci hafta laboratuvar çalışmaları
+│   ├── LAB08_ Data manipulation triggers and Stored procedures _Manual and Exercise_.pdf # Lab manual
+│   ├── PROCEDURE 1 – How to create triggers/
+│   │   └── create_trigger_example.sql          # Trigger oluşturma örnekleri
+│   ├── PROCEDURE 2 – How to alter triggers/
+│   │   └── alter_trigger_example.sql           # Trigger değiştirme örnekleri
+│   ├── PROCEDURE 3 – How to enable, disable or drop triggers/
+│   │   └── enable_disable_drop_triggers.sql    # Trigger yönetimi
+│   ├── PROCEDURE 4 – Working with stored procedures/
+│   │   └── stored_procedures_example.sql       # Stored procedure örnekleri
+│   ├── PROCEDURE 5 – How to alter stored procedures/
+│   │   └── alter_stored_procedures_example.sql # Stored procedure değiştirme
+│   └── PROCEDURE 6 – How to drop stored procedures/
+│       └── drop_stored_procedures_example.sql  # Stored procedure silme
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -153,6 +167,15 @@ COM5041-Database/
 - **Procedure 6**: SQL Script programlama (variables, table variables, temporary tables)
 - **Procedure 7**: Script kontrol yapıları (IF-ELSE, WHILE loops)
 - **Procedure 8**: Hata yönetimi (TRY-CATCH, error handling)
+
+### Lab08 - Triggers ve Stored Procedures
+- **Kapsam**: Veri manipülasyon trigger'ları ve saklı yordamlar (stored procedures)
+- **Procedure 1**: Trigger oluşturma (CREATE TRIGGER, INSERT/UPDATE/DELETE triggers)
+- **Procedure 2**: Trigger değiştirme (ALTER TRIGGER, trigger modifikasyonu)
+- **Procedure 3**: Trigger yönetimi (ENABLE/DISABLE/DROP TRIGGER)
+- **Procedure 4**: Stored procedure çalışmaları (CREATE PROCEDURE, parametre kullanımı)
+- **Procedure 5**: Stored procedure değiştirme (ALTER PROCEDURE)
+- **Procedure 6**: Stored procedure silme (DROP PROCEDURE)
 
 ## 📝 Quiz Çalışmaları
 
@@ -318,11 +341,64 @@ ELSE
 - **Control Flow**: IF-ELSE, WHILE loops
 - **Error Handling**: TRY-CATCH blocks
 
+### Lab08 - Triggers ve Stored Procedures Detayları
+
+#### Procedure 1: Trigger Oluşturma
+```sql
+-- INSERT trigger örneği
+CREATE TRIGGER HumanResources.iCheckModifiedDate
+ON HumanResources.Department
+FOR INSERT
+AS
+BEGIN
+    DECLARE @modifieddate datetime, @DepartmentID int
+    SELECT @modifieddate = modifieddate, @DepartmentID = departmentid FROM inserted;
+    
+    IF(DATEDIFF(Day, @modifieddate, getdate()) > 0)
+    BEGIN
+        UPDATE HumanResources.Department
+        SET ModifiedDate = GETDATE()
+        WHERE DepartmentID = @DepartmentID
+    END
+END
+```
+
+#### Procedure 4: Stored Procedure Oluşturma
+```sql
+-- Basit stored procedure
+CREATE PROCEDURE sp_PurchaseOrderInformation
+AS
+BEGIN
+    SELECT poh.PurchaseOrderID, pod.PurchaseOrderDetailID,
+           poh.OrderDate, poh.TotalDue, pod.ReceivedQty, p.Name ProductName
+    FROM Purchasing.PurchaseOrderHeader poh
+    INNER JOIN Purchasing.PurchaseOrderDetail pod
+    ON poh.PurchaseOrderID = pod.PurchaseOrderID
+    INNER JOIN Production.Product p
+    ON pod.ProductID = p.ProductID
+END
+
+-- OUTPUT parametreli procedure
+CREATE PROC dbo.SampleOutput
+@Parameter2 int OUTPUT
+AS
+SELECT @Parameter2 = 10
+```
+
+#### Lab08 Kapsamındaki Konular
+- **Triggers**: CREATE TRIGGER, ALTER TRIGGER, DROP TRIGGER
+- **Trigger Types**: INSERT, UPDATE, DELETE triggers
+- **Trigger Management**: ENABLE/DISABLE TRIGGER
+- **Stored Procedures**: CREATE PROCEDURE, ALTER PROCEDURE, DROP PROCEDURE
+- **Parameters**: INPUT/OUTPUT parameters, EXEC with parameters
+- **Result Sets**: WITH RESULT SETS clause
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
 - **Lab06**: `AdventureWorks2019`, `Northwind` (Assignment)
 - **Lab07**: `AdventureWorks2019`
+- **Lab08**: `AdventureWorks2019`
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -330,14 +406,14 @@ ELSE
 - SQL Server 2019 veya üzeri
 - SQL Server Management Studio (SSMS)
 - WideWorldImporters örnek veritabanı (Lab04 için)
-- AdventureWorks2019 örnek veritabanı (Lab06 ve Lab07 için)
+- AdventureWorks2019 örnek veritabanı (Lab06, Lab07 ve Lab08 için)
 - Northwind örnek veritabanı (Lab06 Assignment için)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
 2. Gerekli örnek veritabanlarını yükleyin:
    - WideWorldImporters (Lab04)
-   - AdventureWorks2019 (Lab06, Lab07)
+   - AdventureWorks2019 (Lab06, Lab07, Lab08)
    - Northwind (Lab06 Assignment)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
