@@ -92,6 +92,19 @@ COM5041-Database/
 │   │   └── alter_stored_procedures_example.sql # Stored procedure değiştirme
 │   └── PROCEDURE 6 – How to drop stored procedures/
 │       └── drop_stored_procedures_example.sql  # Stored procedure silme
+├── Lab09/                                       # Dokuzuncu hafta laboratuvar çalışmaları
+│   ├── LAB09_ How to Manage Transactions _Manual and Exercise_ _2.pdf # Lab manual
+│   ├── PROCEDURE 1 – How to manage transactions/
+│   │   ├── Step1_Create_Database_and_Table.sql # Veritabanı ve tablo oluşturma
+│   │   ├── Step2_BEGIN_and_COMMIT_TRANSACTION.sql # BEGIN ve COMMIT transaction
+│   │   ├── Step3_ROLLBACK_TRANSACTION.sql      # ROLLBACK transaction
+│   │   ├── Step4_SAVEPOINTS.sql                # SAVEPOINT kullanımı
+│   │   └── Step5_AUTO_ROLLBACK_TRANSACTION.sql # Otomatik rollback işlemleri
+│   └── PROCEDURE 2 - Bank ATM Transaction Creation Example/
+│       ├── Step1_Create_Accounts_Table.sql     # Hesaplar tablosu oluşturma
+│       ├── Step2_Create_MoneyTransfer_Procedure.sql # Para transferi stored procedure
+│       ├── Step3_Transfer_Successful.sql      # Başarılı transfer örneği
+│       └── Step4_Transfer_Failed.sql           # Başarısız transfer örneği
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -176,6 +189,20 @@ COM5041-Database/
 - **Procedure 4**: Stored procedure çalışmaları (CREATE PROCEDURE, parametre kullanımı)
 - **Procedure 5**: Stored procedure değiştirme (ALTER PROCEDURE)
 - **Procedure 6**: Stored procedure silme (DROP PROCEDURE)
+
+### Lab09 - Transaction Yönetimi
+- **Kapsam**: Transaction yönetimi, ACID özellikleri ve veri bütünlüğü
+- **Procedure 1**: Transaction yönetimi temelleri
+  - **Step 1**: Veritabanı ve tablo oluşturma (LAB09 veritabanı, Person tablosu)
+  - **Step 2**: BEGIN TRANSACTION ve COMMIT TRANSACTION kullanımı
+  - **Step 3**: ROLLBACK TRANSACTION ile işlem geri alma
+  - **Step 4**: SAVEPOINT ile kısmi geri alma işlemleri
+  - **Step 5**: Otomatik rollback ve hata yönetimi
+- **Procedure 2**: Bank ATM Transaction Örneği
+  - **Step 1**: Accounts tablosu oluşturma (AccountID, FirstName, LastName, Branch, Balance)
+  - **Step 2**: Para transferi stored procedure oluşturma (MoneyTransfer)
+  - **Step 3**: Başarılı para transferi senaryosu
+  - **Step 4**: Başarısız transfer ve rollback senaryosu
 
 ## 📝 Quiz Çalışmaları
 
@@ -393,12 +420,78 @@ SELECT @Parameter2 = 10
 - **Parameters**: INPUT/OUTPUT parameters, EXEC with parameters
 - **Result Sets**: WITH RESULT SETS clause
 
+### Lab09 - Transaction Yönetimi Detayları
+
+#### Procedure 1: Transaction Yönetimi Temelleri
+```sql
+-- BEGIN TRANSACTION ve COMMIT
+BEGIN TRANSACTION;
+INSERT INTO Person VALUES ('Smith', 'John', '123 Main St', 'Istanbul', 30);
+COMMIT TRANSACTION;
+
+-- ROLLBACK TRANSACTION
+BEGIN TRANSACTION;
+UPDATE Person SET Age = 25 WHERE PersonID = 1;
+ROLLBACK TRANSACTION; -- Değişiklik geri alınır
+
+-- SAVEPOINT kullanımı
+BEGIN TRANSACTION;
+SAVE TRANSACTION SavePoint1;
+INSERT INTO Person VALUES ('Doe', 'Jane', '456 Oak Ave', 'Ankara', 28);
+ROLLBACK TRANSACTION SavePoint1; -- Sadece bu noktaya kadar geri alınır
+COMMIT TRANSACTION;
+```
+
+#### Procedure 2: Bank ATM Transaction Örneği
+```sql
+-- Para transferi stored procedure
+CREATE PROCEDURE MoneyTransfer
+    @FromAccount CHAR(10),
+    @ToAccount CHAR(10),
+    @Amount MONEY
+AS
+BEGIN
+    BEGIN TRANSACTION;
+    
+    -- Gönderen hesaptan para çekme
+    UPDATE Accounts 
+    SET Balance = Balance - @Amount 
+    WHERE AccountID = @FromAccount;
+    
+    -- Alıcı hesaba para yatırma
+    UPDATE Accounts 
+    SET Balance = Balance + @Amount 
+    WHERE AccountID = @ToAccount;
+    
+    -- Bakiye kontrolü
+    IF (SELECT Balance FROM Accounts WHERE AccountID = @FromAccount) < 0
+    BEGIN
+        ROLLBACK TRANSACTION;
+        PRINT 'Insufficient balance. Transaction rolled back.';
+    END
+    ELSE
+    BEGIN
+        COMMIT TRANSACTION;
+        PRINT 'Transaction completed successfully.';
+    END
+END
+```
+
+#### Lab09 Kapsamındaki Konular
+- **Transactions**: BEGIN TRANSACTION, COMMIT TRANSACTION, ROLLBACK TRANSACTION
+- **ACID Properties**: Atomicity, Consistency, Isolation, Durability
+- **Savepoints**: SAVEPOINT, ROLLBACK TO SAVEPOINT
+- **Error Handling**: Transaction içinde hata yönetimi
+- **Real-world Application**: Bank ATM para transferi senaryosu
+- **Data Integrity**: Transaction ile veri bütünlüğü sağlama
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
 - **Lab06**: `AdventureWorks2019`, `Northwind` (Assignment)
 - **Lab07**: `AdventureWorks2019`
 - **Lab08**: `AdventureWorks2019`
+- **Lab09**: `LAB09` (Person ve Accounts tabloları)
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -408,6 +501,7 @@ SELECT @Parameter2 = 10
 - WideWorldImporters örnek veritabanı (Lab04 için)
 - AdventureWorks2019 örnek veritabanı (Lab06, Lab07 ve Lab08 için)
 - Northwind örnek veritabanı (Lab06 Assignment için)
+- LAB09 veritabanı (Lab09 için - script ile oluşturulur)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
@@ -415,6 +509,7 @@ SELECT @Parameter2 = 10
    - WideWorldImporters (Lab04)
    - AdventureWorks2019 (Lab06, Lab07, Lab08)
    - Northwind (Lab06 Assignment)
+   - LAB09 (Lab09 - script ile otomatik oluşturulur)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
 
@@ -426,6 +521,7 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - ✅ **SQL Programlama**: Karmaşık sorgular yazma ve optimize etme
 - ✅ **Güvenlik Yönetimi**: Kullanıcı rolleri ve yetki sistemleri
 - ✅ **Stored Procedures**: Saklı yordam geliştirme
+- ✅ **Transaction Yönetimi**: ACID özellikleri ve veri bütünlüğü
 - ✅ **Veritabanı Yönetimi**: Backup, restore ve maintenance
 - ✅ **Performans Tuning**: İndeksleme ve sorgu optimizasyonu
 
@@ -440,7 +536,8 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 ### SQL Server Özellikleri
 - Sistem katalog görünümleri (`sys.server_principals`, `sys.database_principals`)
 - Koşullu nesne oluşturma (`IF NOT EXISTS`)
-- Transaction yönetimi (`GO` komutları)
+- Transaction yönetimi (`BEGIN TRANSACTION`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`)
+- ACID özellikleri ile veri bütünlüğü garantisi
 
 
 ## 📞 İletişim
