@@ -105,6 +105,26 @@ COM5041-Database/
 │       ├── Step2_Create_MoneyTransfer_Procedure.sql # Para transferi stored procedure
 │       ├── Step3_Transfer_Successful.sql      # Başarılı transfer örneği
 │       └── Step4_Transfer_Failed.sql           # Başarısız transfer örneği
+├── Lab10/                                       # Onuncu hafta laboratuvar çalışmaları
+│   ├── LAB10_ Working with user-defined functions and XML _Manual and Exercise_.pdf # Lab manual
+│   ├── PROCEDURE 1 – How to code user-defined functions/
+│   │   ├── Step1_CreateFunction.sql            # Scalar function oluşturma
+│   │   ├── Step2_QueryWithFunction.sql         # Function ile sorgulama
+│   │   ├── Step3_CallWithConstant.sql          # Sabit değer ile function çağırma
+│   │   ├── Step4_FunctionWithTwoParameters.sql # İki parametreli function
+│   │   ├── Step4_TestDefaultParameter.sql       # Varsayılan parametre testi
+│   │   ├── Step4_TestTwoParameters.sql          # İki parametre testi
+│   │   ├── Step5_ExecuteKeyword.sql             # EXECUTE keyword kullanımı
+│   │   ├── Step6_InlineTableValuedFunction.sql  # Inline table-valued function
+│   │   └── Step6_TestTableValuedFunction.sql    # Table-valued function testi
+│   └── PROCEDURE 2 – How to work with XML/
+│       ├── Step1_CreateDatabaseAndTable.sql     # Showroom veritabanı ve Car tablosu
+│       ├── Step2_FOR_XML_AUTO.sql               # FOR XML AUTO kullanımı
+│       ├── Step3_FOR_XML_PATH.sql               # FOR XML PATH kullanımı
+│       ├── Step4_FOR_XML_PATH_WithElementName.sql # Element isimleri ile XML
+│       ├── Step5_FOR_XML_PATH_WithRoot.sql      # Root element ile XML
+│       ├── Step6_FOR_XML_PATH_WithNestedElements.sql # İç içe XML elementleri
+│       └── Step7_FOR_XML_PATH_WithAttributes.sql # XML attribute'ları
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -203,6 +223,24 @@ COM5041-Database/
   - **Step 2**: Para transferi stored procedure oluşturma (MoneyTransfer)
   - **Step 3**: Başarılı para transferi senaryosu
   - **Step 4**: Başarısız transfer ve rollback senaryosu
+
+### Lab10 - User-Defined Functions ve XML
+- **Kapsam**: Kullanıcı tanımlı fonksiyonlar ve XML veri işleme
+- **Procedure 1**: User-Defined Functions (Kullanıcı Tanımlı Fonksiyonlar)
+  - **Step 1**: Scalar function oluşturma (CREATE FUNCTION, RETURNS int)
+  - **Step 2**: Function ile sorgulama (SELECT ile function kullanımı)
+  - **Step 3**: Sabit değer ile function çağırma
+  - **Step 4**: İki parametreli function ve varsayılan parametre kullanımı
+  - **Step 5**: EXECUTE keyword ile function çağırma
+  - **Step 6**: Inline table-valued function oluşturma ve kullanımı
+- **Procedure 2**: XML İşlemleri
+  - **Step 1**: Showroom veritabanı ve Car tablosu oluşturma
+  - **Step 2**: FOR XML AUTO ile XML formatında veri döndürme
+  - **Step 3**: FOR XML PATH ile özelleştirilmiş XML yapısı
+  - **Step 4**: Element isimleri ile XML oluşturma
+  - **Step 5**: Root element ekleme
+  - **Step 6**: İç içe (nested) XML elementleri oluşturma
+  - **Step 7**: XML attribute'ları ekleme
 
 ## 📝 Quiz Çalışmaları
 
@@ -485,6 +523,79 @@ END
 - **Real-world Application**: Bank ATM para transferi senaryosu
 - **Data Integrity**: Transaction ile veri bütünlüğü sağlama
 
+### Lab10 - User-Defined Functions ve XML Detayları
+
+#### Procedure 1: User-Defined Functions
+```sql
+-- Scalar function oluşturma
+CREATE FUNCTION dbo.GetEmployeeAge
+(
+    @BirthDate datetime
+)
+RETURNS int
+AS
+BEGIN
+    DECLARE @Age int
+    SELECT @Age = DATEDIFF(YEAR, @BirthDate, GETDATE())
+    RETURN @Age
+END
+
+-- Function kullanımı
+SELECT BusinessEntityID, dbo.GetEmployeeAge(BirthDate) AS Age
+FROM HumanResources.Employee;
+
+-- Inline table-valued function
+CREATE FUNCTION dbo.GetOrderDetails
+(@SalesOrderID int)
+RETURNS TABLE AS RETURN
+(
+    SELECT 
+        sod.SalesOrderID,
+        sod.SalesOrderDetailID,
+        p.Name AS ProductName
+    FROM Sales.SalesOrderDetail sod
+    INNER JOIN Production.Product p ON sod.ProductID = p.ProductID
+    WHERE sod.SalesOrderID = @SalesOrderID
+)
+
+-- Table-valued function kullanımı
+SELECT * FROM dbo.GetOrderDetails(43659);
+```
+
+#### Procedure 2: XML İşlemleri
+```sql
+-- FOR XML AUTO
+SELECT * FROM Car
+FOR XML AUTO;
+
+-- FOR XML PATH
+SELECT 
+    CarId AS '@id',
+    Name AS 'Car/Name',
+    Make AS 'Car/Make',
+    Price AS 'Car/Price'
+FROM Car
+FOR XML PATH('Vehicle'), ROOT('Showroom');
+
+-- Nested XML elements
+SELECT 
+    Make AS '@Make',
+    Name AS 'Model',
+    Price AS 'Price'
+FROM Car
+FOR XML PATH('Car'), ROOT('Cars');
+```
+
+#### Lab10 Kapsamındaki Konular
+- **User-Defined Functions**: CREATE FUNCTION, ALTER FUNCTION, DROP FUNCTION
+- **Scalar Functions**: RETURNS scalar_type, RETURN statement
+- **Table-Valued Functions**: RETURNS TABLE, inline table-valued functions
+- **Function Parameters**: Input parameters, default parameters
+- **Function Execution**: SELECT, EXECUTE keyword
+- **XML Processing**: FOR XML AUTO, FOR XML PATH
+- **XML Structure**: Elements, attributes, nested elements, root elements
+- **Data Transformation**: SQL to XML conversion
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
@@ -492,6 +603,7 @@ END
 - **Lab07**: `AdventureWorks2019`
 - **Lab08**: `AdventureWorks2019`
 - **Lab09**: `LAB09` (Person ve Accounts tabloları)
+- **Lab10**: `AdventureWorks2019`, `Showroom` (Car tablosu)
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -499,17 +611,19 @@ END
 - SQL Server 2019 veya üzeri
 - SQL Server Management Studio (SSMS)
 - WideWorldImporters örnek veritabanı (Lab04 için)
-- AdventureWorks2019 örnek veritabanı (Lab06, Lab07 ve Lab08 için)
+- AdventureWorks2019 örnek veritabanı (Lab06, Lab07, Lab08 ve Lab10 için)
 - Northwind örnek veritabanı (Lab06 Assignment için)
 - LAB09 veritabanı (Lab09 için - script ile oluşturulur)
+- Showroom veritabanı (Lab10 için - script ile oluşturulur)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
 2. Gerekli örnek veritabanlarını yükleyin:
    - WideWorldImporters (Lab04)
-   - AdventureWorks2019 (Lab06, Lab07, Lab08)
+   - AdventureWorks2019 (Lab06, Lab07, Lab08, Lab10)
    - Northwind (Lab06 Assignment)
    - LAB09 (Lab09 - script ile otomatik oluşturulur)
+   - Showroom (Lab10 - script ile otomatik oluşturulur)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
 
@@ -521,7 +635,9 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - ✅ **SQL Programlama**: Karmaşık sorgular yazma ve optimize etme
 - ✅ **Güvenlik Yönetimi**: Kullanıcı rolleri ve yetki sistemleri
 - ✅ **Stored Procedures**: Saklı yordam geliştirme
+- ✅ **User-Defined Functions**: Scalar ve table-valued fonksiyonlar
 - ✅ **Transaction Yönetimi**: ACID özellikleri ve veri bütünlüğü
+- ✅ **XML Processing**: SQL'den XML'e veri dönüştürme
 - ✅ **Veritabanı Yönetimi**: Backup, restore ve maintenance
 - ✅ **Performans Tuning**: İndeksleme ve sorgu optimizasyonu
 
@@ -538,6 +654,8 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - Koşullu nesne oluşturma (`IF NOT EXISTS`)
 - Transaction yönetimi (`BEGIN TRANSACTION`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`)
 - ACID özellikleri ile veri bütünlüğü garantisi
+- User-defined functions (`CREATE FUNCTION`, scalar ve table-valued functions)
+- XML işleme (`FOR XML AUTO`, `FOR XML PATH`, XML element ve attribute yapıları)
 
 
 ## 📞 İletişim

@@ -1,0 +1,4 @@
+USE Showroom
+SELECT * FROM Car
+FOR XML AUTO
+

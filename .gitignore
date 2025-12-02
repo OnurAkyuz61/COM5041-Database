@@ -1,0 +1,85 @@
+# SQL Server Database Files
+*.mdf
+*.ndf
+*.ldf
+*.bak
+*.trn
+*.log
+
+# SQL Server Temporary Files
+*.tmp
+*.temp
+
+# SQL Server Script Output Files
+*.rpt
+*.out
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Windows
+*.lnk
+*.exe
+*.dll
+
+# Backup files
+*.backup
+*.old
+*~
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Personal notes and drafts
+notes.txt
+draft.*
+TODO.txt
+
+# Compiled files
+*.pyc
+__pycache__/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Package files
+node_modules/
+*.zip
+*.tar.gz
+*.rar
+
+# PDF files (if you want to ignore PDFs, uncomment below)
+# *.pdf
+
+# Image files (if you want to ignore images, uncomment below)
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.svg
+
