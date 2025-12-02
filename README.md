@@ -125,6 +125,10 @@ COM5041-Database/
 │       ├── Step5_FOR_XML_PATH_WithRoot.sql      # Root element ile XML
 │       ├── Step6_FOR_XML_PATH_WithNestedElements.sql # İç içe XML elementleri
 │       └── Step7_FOR_XML_PATH_WithAttributes.sql # XML attribute'ları
+├── Lab10 - Assignment/                          # Lab10 Assignment
+│   ├── LAB10.pdf                                # Assignment talimatları
+│   ├── 2200005590 - PROCEDURE 1.sql            # Assignment Procedure 1
+│   └── 2200005590 - PROCEDURE 2.sql            # Assignment Procedure 2
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -241,6 +245,11 @@ COM5041-Database/
   - **Step 5**: Root element ekleme
   - **Step 6**: İç içe (nested) XML elementleri oluşturma
   - **Step 7**: XML attribute'ları ekleme
+- **Assignment**: Lab10 - Assignment
+  - **Dosyalar**:
+    - `LAB10.pdf` - Assignment talimatları
+    - `2200005590 - PROCEDURE 1.sql` - Assignment Procedure 1 çözümü
+    - `2200005590 - PROCEDURE 2.sql` - Assignment Procedure 2 çözümü
 
 ## 📝 Quiz Çalışmaları
 
@@ -586,6 +595,15 @@ FROM Car
 FOR XML PATH('Car'), ROOT('Cars');
 ```
 
+#### Lab10 Assignment
+- **Kapsam**: User-defined functions ve XML konularında pratik uygulamalar
+- **Procedure 1**: Karmaşık user-defined function oluşturma ve kullanımı
+- **Procedure 2**: XML işlemleri ile veri dönüştürme ve raporlama
+- **Dosyalar**:
+  - `LAB10.pdf` - Assignment talimatları ve gereksinimler
+  - `2200005590 - PROCEDURE 1.sql` - Assignment Procedure 1 çözümü
+  - `2200005590 - PROCEDURE 2.sql` - Assignment Procedure 2 çözümü
+
 #### Lab10 Kapsamındaki Konular
 - **User-Defined Functions**: CREATE FUNCTION, ALTER FUNCTION, DROP FUNCTION
 - **Scalar Functions**: RETURNS scalar_type, RETURN statement
@@ -595,6 +613,7 @@ FOR XML PATH('Car'), ROOT('Cars');
 - **XML Processing**: FOR XML AUTO, FOR XML PATH
 - **XML Structure**: Elements, attributes, nested elements, root elements
 - **Data Transformation**: SQL to XML conversion
+- **Assignment**: Pratik uygulamalar ve gerçek dünya senaryoları
 
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
