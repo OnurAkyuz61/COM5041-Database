@@ -129,6 +129,13 @@ COM5041-Database/
 │   ├── LAB10.pdf                                # Assignment talimatları
 │   ├── 2200005590 - PROCEDURE 1.sql            # Assignment Procedure 1
 │   └── 2200005590 - PROCEDURE 2.sql            # Assignment Procedure 2
+├── Lab11/                                       # On birinci hafta laboratuvar çalışmaları
+│   ├── LAB11_ Working with MongoDB _Manual_.pdf # Lab manual
+│   ├── README.md                                # Lab11 detaylı açıklamalar
+│   ├── cities_data.json                         # Şehir verileri (JSON formatında)
+│   ├── setup.js                                 # Veritabanı kurulum scripti
+│   ├── queries.js                               # Basit sorgu örnekleri
+│   └── aggregation_pipeline.js                  # Aggregation pipeline örnekleri
 └── Quiz01/                                      # Quiz 01 - Temel Veritabanı Kavramları
     ├── quiz01_questions.pdf                     # Quiz soruları
     └── quiz01_answers.sql                       # Quiz cevapları
@@ -250,6 +257,29 @@ COM5041-Database/
     - `LAB10.pdf` - Assignment talimatları
     - `2200005590 - PROCEDURE 1.sql` - Assignment Procedure 1 çözümü
     - `2200005590 - PROCEDURE 2.sql` - Assignment Procedure 2 çözümü
+
+### Lab11 - MongoDB ile Çalışma
+- **Kapsam**: MongoDB NoSQL veritabanı, MongoDB Compass kullanımı ve aggregation pipeline
+- **Veritabanı**: `populations` (MongoDB)
+- **Collection**: `cities` (15 şehir verisi)
+- **Setup**: Veritabanı ve collection oluşturma, veri ekleme
+  - `setup.js` - Veritabanı kurulum scripti
+  - `cities_data.json` - Şehir verileri (JSON formatında)
+- **Basit Sorgular**: 
+  - `find()` ile filtreleme
+  - `sort()` ile sıralama
+  - Projeksiyon (field seçimi)
+- **Aggregation Pipeline**:
+  - `$match` - Filtreleme
+  - `$sort` - Sıralama
+  - `$group` - Gruplama ve aggregation
+  - `$project` - Sonuç yapısını dönüştürme
+- **MongoDB Compass**: GUI aracı ile veritabanı yönetimi
+- **Dosyalar**:
+  - `LAB11_ Working with MongoDB _Manual_.pdf` - Lab manual
+  - `README.md` - Detaylı açıklamalar ve kullanım kılavuzu
+  - `queries.js` - Basit sorgu örnekleri
+  - `aggregation_pipeline.js` - Aggregation pipeline örnekleri
 
 ## 📝 Quiz Çalışmaları
 
@@ -615,6 +645,92 @@ FOR XML PATH('Car'), ROOT('Cars');
 - **Data Transformation**: SQL to XML conversion
 - **Assignment**: Pratik uygulamalar ve gerçek dünya senaryoları
 
+### Lab11 - MongoDB ile Çalışma Detayları
+
+#### Setup ve Veri Yapısı
+```javascript
+// Veritabanı oluşturma ve kullanma
+use populations;
+
+// Collection'a veri ekleme
+db.cities.insertMany([
+  {"name": "Tokyo", "country": "Japan", "continent": "Asia", "population": 37.4},
+  {"name": "Delhi", "country": "India", "continent": "Asia", "population": 28.514},
+  {"name": "Shanghai", "country": "China", "continent": "Asia", "population": 25.582},
+  // ... diğer şehirler
+]);
+```
+
+#### Basit Sorgular
+```javascript
+// Asya'daki şehirleri listele
+db.cities.find(
+  { "continent": "Asia" },
+  { "_id": 0, "name": 1, "population": 1 }
+);
+
+// Nüfusa göre sıralama (artan)
+db.cities.find(
+  { "continent": "Asia" },
+  { "_id": 0, "name": 1, "population": 1 }
+).sort({ "population": 1 });
+
+// Nüfusa göre sıralama (azalan)
+db.cities.find(
+  { "continent": "Asia" },
+  { "_id": 0, "name": 1, "population": 1 }
+).sort({ "population": -1 });
+```
+
+#### Aggregation Pipeline
+```javascript
+// Tam pipeline - En kalabalık şehirleri kıta ve ülkeye göre grupla
+db.cities.aggregate([
+  {
+    $match: {
+      "continent": { $in: ["North America", "Asia"] }
+    }
+  },
+  {
+    $sort: { "population": -1 }
+  },
+  {
+    $group: {
+      "_id": {
+        "continent": "$continent",
+        "country": "$country"
+      },
+      "first_city": { $first: "$name" },
+      "highest_population": { $max: "$population" }
+    }
+  },
+  {
+    $project: {
+      "_id": 0,
+      "location": {
+        "country": "$_id.country",
+        "continent": "$_id.continent"
+      },
+      "most_populated_city": {
+        "name": "$first_city",
+        "population": "$highest_population"
+      }
+    }
+  }
+]);
+```
+
+#### Lab11 Kapsamındaki Konular
+- **MongoDB Temelleri**: NoSQL veritabanı, document-based storage
+- **MongoDB Compass**: GUI aracı ile veritabanı yönetimi
+- **CRUD İşlemleri**: Create, Read, Update, Delete operations
+- **Query Operations**: `find()`, `findOne()`, filtreleme, projeksiyon
+- **Sorting**: `sort()` ile sıralama
+- **Aggregation Pipeline**: `$match`, `$sort`, `$group`, `$project`
+- **Data Modeling**: JSON/BSON document yapısı
+- **Collection Management**: Collection oluşturma ve yönetimi
+- **Schema Analysis**: MongoDB Compass Schema Analyzer
+
 ### Kullanılan Veritabanları
 - **Lab04**: `WideWorldImporters`, `master`
 - **Lab05**: `TheFirstDatabase`, `MusicCompanyDB`, `MusicCompanyDB_B`, `MusicCompanyDB_C`, `MusicCompanyDB_D`
@@ -623,6 +739,7 @@ FOR XML PATH('Car'), ROOT('Cars');
 - **Lab08**: `AdventureWorks2019`
 - **Lab09**: `LAB09` (Person ve Accounts tabloları)
 - **Lab10**: `AdventureWorks2019`, `Showroom` (Car tablosu)
+- **Lab11**: `populations` (MongoDB - cities collection)
 
 ## 🚀 Kurulum ve Çalıştırma
 
@@ -634,6 +751,8 @@ FOR XML PATH('Car'), ROOT('Cars');
 - Northwind örnek veritabanı (Lab06 Assignment için)
 - LAB09 veritabanı (Lab09 için - script ile oluşturulur)
 - Showroom veritabanı (Lab10 için - script ile oluşturulur)
+- MongoDB Community Edition (Lab11 için)
+- MongoDB Compass (Lab11 için - GUI aracı)
 
 ### Adımlar
 1. SQL Server'ı kurun ve yapılandırın
@@ -643,6 +762,7 @@ FOR XML PATH('Car'), ROOT('Cars');
    - Northwind (Lab06 Assignment)
    - LAB09 (Lab09 - script ile otomatik oluşturulur)
    - Showroom (Lab10 - script ile otomatik oluşturulur)
+   - MongoDB populations (Lab11 - setup.js ile oluşturulur)
 3. SSMS'i açın ve sunucuya bağlanın
 4. İlgili `.sql` dosyalarını sırasıyla çalıştırın
 
@@ -657,6 +777,8 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - ✅ **User-Defined Functions**: Scalar ve table-valued fonksiyonlar
 - ✅ **Transaction Yönetimi**: ACID özellikleri ve veri bütünlüğü
 - ✅ **XML Processing**: SQL'den XML'e veri dönüştürme
+- ✅ **NoSQL Veritabanları**: MongoDB ile document-based storage
+- ✅ **Aggregation Pipeline**: MongoDB'de karmaşık veri işleme
 - ✅ **Veritabanı Yönetimi**: Backup, restore ve maintenance
 - ✅ **Performans Tuning**: İndeksleme ve sorgu optimizasyonu
 
@@ -675,6 +797,8 @@ Bu ders sonunda aşağıdaki becerileri kazandım:
 - ACID özellikleri ile veri bütünlüğü garantisi
 - User-defined functions (`CREATE FUNCTION`, scalar ve table-valued functions)
 - XML işleme (`FOR XML AUTO`, `FOR XML PATH`, XML element ve attribute yapıları)
+- NoSQL veritabanları (MongoDB, document-based storage, BSON formatı)
+- Aggregation pipeline (`$match`, `$sort`, `$group`, `$project` operatörleri)
 
 
 ## 📞 İletişim
